@@ -10,7 +10,7 @@ args = parser.parse_args()
 # ----------------------
 # Copy media files
 # ----------------------
-blog_dir='../eventuallycoding-nuxt3'
+blog_dir='../eventuallycoding-bloggr'
 source_dir='./media'
 dest_dir=f'{blog_dir}/public/images/{args.slug}'
 
@@ -36,25 +36,13 @@ month = now.month
 
 source_file = f'{args.slug}.md'
 
-dest_dir = os.path.join(blog_dir, 'content', 'articles', str(year), f"{month:02d}")
+dest_dir = os.path.join(blog_dir, 'content', str(year), f"{month:02d}")
 
 os.makedirs(dest_dir, exist_ok=True)
 blog_post_in_french = os.path.join(dest_dir, f'{args.slug}.md')
 shutil.copy(source_file, blog_post_in_french)
 
 print(f'Le fichier a été copié et renommé en {blog_post_in_french}')
-
-# ----------------------
-# Create english version
-# ----------------------
-dest_dir = os.path.join(blog_dir, 'content', 'articles', 'en', str(year), f"{month:02d}")
-
-os.makedirs(dest_dir, exist_ok=True)
-blog_post_in_english = os.path.join(dest_dir, f'{args.slug}.md')
-shutil.copy(source_file, blog_post_in_english)
-
-print(f'Le fichier a été copié et renommé pour sa version anglaise {blog_post_in_english}')
-
 # ----------------------
 # Add yaml front matter
 # ----------------------
@@ -64,7 +52,7 @@ current_date = datetime.now().strftime("%Y-%m-%d")
 def add_yaml_front_matter(blog_post, language='fr'):
     if language == 'fr':
         alternate_language = 'en'
-        alternate_url = f"https://eventuallycoding.com/en/{year}/{month:02d}/{args.slug}"
+        alternate_url = f"https://eventuallymaking.io/{year}/{month:02d}/{args.slug}"
     else:
         alternate_language = 'fr'
         alternate_url = f"https://eventuallycoding.com/{year}/{month:02d}/{args.slug}"
@@ -92,5 +80,4 @@ alternates:
 
 
 add_yaml_front_matter(blog_post_in_french, language='fr')
-add_yaml_front_matter(blog_post_in_english, language='en')
 

@@ -7,13 +7,14 @@ parser = argparse.ArgumentParser(description="Translate file in english")
 parser.add_argument('slug', help='slug of the blog post')
 args = parser.parse_args()
 
-blog_dir='../eventuallycoding-nuxt3'
+blog_dir='../eventuallycoding-bloggr'
+blog_dir_en='../eventuallymaking'
 now = datetime.now()
 year = now.year
 month = now.month
 
-dir_of_french_blog_post = os.path.join(blog_dir, 'content', 'articles', str(year), f"{month:02d}")
-dir_of_english_blog_post = os.path.join(blog_dir, 'content', 'articles','en', str(year), f"{month:02d}")
+dir_of_french_blog_post = os.path.join(blog_dir, 'content', str(year), f"{month:02d}")
+dir_of_english_blog_post = os.path.join(blog_dir_en, 'content', str(year), f"{month:02d}")
 blog_post_in_french = os.path.join(dir_of_french_blog_post, f'{args.slug}.md')
 blog_post_in_english = os.path.join(dir_of_english_blog_post, f'{args.slug}.md')
 
