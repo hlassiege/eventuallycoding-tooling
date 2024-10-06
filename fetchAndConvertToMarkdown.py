@@ -33,14 +33,32 @@ input_file = 'output.docx'
 output_file = f'{args.slug}.md'
 output = pypandoc.convert_file(input_file, 'markdown', outputfile=output_file, extra_args=['--extract-media', '.', '--wrap=none'])
 
+def update_links_format(md_file_path):
+    # Lire le contenu du fichier
+    with open(md_file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+
+    # Le pattern pour matcher les liens avec accolades autour du texte
+    pattern = r'\[\[([^\]]+)\]\{.*?\}\]\((.*?)\)'
+
+    # Remplacer en gardant seulement le texte et l'URL
+    updated_content = re.sub(pattern, r'[\1](\2)', content)
+
+    # Écrire le contenu modifié dans le fichier
+    with open(md_file_path, 'w', encoding='utf-8') as file:
+        file.write(updated_content)
+
+    print(f"Les liens ont été corrigés dans {md_file_path}")
 
 def update_image_format(md_file_path):
     with open(md_file_path, 'r', encoding='utf-8') as file:
         content = file.read()
 
-    pattern = r'!\[\]\(\./media/(.*?)\)\{.*?\}'
-    replacement = r'::nuxt-image{src="/images/' + args.slug + r'/\1" alt=""}\n::'
-    updated_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+    # Le pattern pour matcher les accolades et leur contenu
+    pattern = r'(\!\[\]\(.*?\))\{.*?\}'
+
+    # Remplacer en ne gardant que la partie avant les accolades
+    updated_content = re.sub(pattern, r'\1', content)
 
     with open(md_file_path, 'w', encoding='utf-8') as file:
         file.write(updated_content)
@@ -49,3 +67,4 @@ def update_image_format(md_file_path):
 
 
 update_image_format(output_file)
+update_links_format(output_file)

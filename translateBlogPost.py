@@ -7,8 +7,8 @@ parser = argparse.ArgumentParser(description="Translate file in english")
 parser.add_argument('slug', help='slug of the blog post')
 args = parser.parse_args()
 
-blog_dir='../eventuallycoding-bloggr'
-blog_dir_en='../eventuallymaking'
+blog_dir='../eventuallycoding.com'
+blog_dir_en='../eventuallymaking.io'
 now = datetime.now()
 year = now.year
 month = now.month

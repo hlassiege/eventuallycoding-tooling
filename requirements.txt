@@ -3,4 +3,5 @@ google-auth-httplib2==0.1.0
 google-auth-oauthlib==0.5.1
 pypandoc==1.12
 requests==2.31.0
-
+pytube==15.0.0
+yt-dlp==2024.9.27
