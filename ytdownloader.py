@@ -16,7 +16,6 @@ def download_youtube_video(video_url, format_code):
 
 # Demander l'URL de la vidéo à l'utilisateur
 video_url = input("Veuillez entrer l'URL complète de la vidéo YouTube : ")
-# video_url = "https://www.youtube.com/watch?v=Yu0B903O_CA"
 
 # Lister les formats disponibles
 list_formats(video_url)
